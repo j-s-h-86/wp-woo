@@ -12,10 +12,11 @@ $terms = get_terms(array(
 ?>
 
 <div class="taxTermsContainer">
+    <p class="categoriesP">Kategorier: </p>
     <?php
     if ($terms && !is_wp_error($terms)) {
         foreach ($terms as $term) {
-            echo '<a href="' . get_term_link($term) . '">' . esc_html($term->name) . '</a>';
+            echo '<a class="taxTermsLinks" href="' . get_term_link($term) . '">' . esc_html($term->name) . '</a>';
         }
     }
     ?>

@@ -45,7 +45,8 @@ function display_collections()
         $collection_permalink = get_permalink($collection->ID);
         echo '<div class="collection">';
         echo '<a href="' . esc_url($collection_permalink) . '">';
-        echo '<h2>' . esc_html(get_the_title($collection->ID)) . '</h2>';
+        echo get_the_post_thumbnail($collection->ID, 'thumbnail');
+        echo '<h3>' . esc_html(get_the_title($collection->ID)) . '</h3>';
         echo '</a>';
         echo '<p>Totalpris: ' . wc_price($total_price) . '</p>';
 

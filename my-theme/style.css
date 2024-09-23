@@ -45,6 +45,13 @@ body {
     border-radius: 10px;
 }
 
+.categoriesP {
+    margin-top: 0;
+}
+
+.taxTermsLinks {
+    text-decoration: underline;
+}
 
 .products-by-category {
     display: flex;
@@ -130,8 +137,8 @@ a {
 }
 
 .collection {
-    height: 175px;
-    width: 125px;
+    height: 300px;
+    width: 150px;
     border: 1px solid black;
     border-radius: 5%;
     text-align: center;

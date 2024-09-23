@@ -123,6 +123,10 @@ function get_products_in_categories()
                                     <h3><?php the_title(); ?></h3>
                                     <span class="price"><?php echo $product->get_price_html(); ?></span>
                                 </a>
+                                <form method="post" class="buy-now-form">
+                                    <input type="hidden" name="product_id" value="<?php echo esc_attr($product->get_id()); ?>">
+                                    <button type="submit" class="buy-now-button">Köp nu</button>
+                                </form>
 
                             </div>
                             <?php
@@ -153,4 +157,19 @@ function mt_handle_add_all_to_cart()
 }
 
 add_action('template_redirect', 'mt_handle_add_all_to_cart');
+
+add_action('init', 'handle_buy_now');
+function handle_buy_now()
+{
+    if (isset($_POST['product_id'])) {
+        $product_id = intval($_POST['product_id']);
+        // Lägg till produkten i kundvagnen
+        WC()->cart->add_to_cart($product_id);
+
+        // Om du vill omdirigera till kundvagnen eller kassan efteråt
+        wp_redirect(wc_get_cart_url());
+        exit;
+    }
+}
+
 
