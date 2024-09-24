@@ -6,8 +6,8 @@ get_header();
 <?php
 $terms = get_terms(array(
     'taxonomy' => 'connoisseur',
-    // 'hide_empty' => true,
-// 'parent' => 0
+    'hide_empty' => true,
+    'parent' => 0
 ));
 ?>
 
@@ -35,8 +35,8 @@ $terms = get_terms(array(
         <?php
         $terms = get_terms(array(
             'taxonomy' => 'connoisseur',
-            // 'hide_empty' => true,
-            // 'parent' => 0
+            'hide_empty' => true,
+            'parent' => 0
         ));
         if ($terms && !is_wp_error($terms)) {
             foreach ($terms as $term) {
@@ -89,48 +89,13 @@ function handle_date_and_taxonomy_filter()
         $args['tax_query'] = $tax_query;
     }
 
-    $query = new WP_Query($args);
-
-    echo '<div class="collectionContainers">';
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-            echo '<div class="collection"><a href="' . get_permalink() . '">' . get_the_title() . '</a></div>';
-        }
-        wp_reset_postdata();
-    } else {
-        echo '<p>Inga inlägg hittades.</p>';
-    }
-    echo '</div>';
+    display_collections($args);
 }
 
 ?>
 
 <?php
 handle_date_and_taxonomy_filter();
-?>
-
-<?php
-if (have_posts()):
-
-    while (have_posts()):
-        the_post();
-
-        ?>
-        <!-- <a href="<?php echo (get_permalink(get_the_ID())); ?>">
-            <div>
-                <?php
-                the_title();
-                ?>
-            </div>
-        </a> -->
-
-        <?php
-    endwhile;
-
-
-
-endif;
 ?>
 
 <?php

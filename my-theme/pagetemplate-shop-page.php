@@ -6,59 +6,7 @@ get_header();
 ?>
 
 <?php
-function display_collections()
-{
-    $collections = get_posts(array(
-        'post_type' => 'collection',
-        'posts_per_page' => -1,
-        'post_status' => 'publish'
-    ));
 
-    if (empty($collections)) {
-        echo '<p>Inga kollektioner hittades.</p>';
-        return;
-    }
-
-    echo '<div class="collectionContainers">';
-
-    foreach ($collections as $collection) {
-        $selected_products = get_post_meta($collection->ID, '_collection_products', true);
-
-
-        if (!is_array($selected_products)) {
-            $selected_products = array();
-        }
-
-        if (empty($selected_products)) {
-            echo '<p>No products found for collection ID: ' . $collection->ID . '</p>';
-            continue;
-        }
-
-        $total_price = 0;
-        foreach ($selected_products as $product_id) {
-            $product = wc_get_product($product_id);
-            if ($product) {
-                $total_price += $product->get_price();
-            }
-        }
-
-        $collection_permalink = get_permalink($collection->ID);
-        echo '<div class="collection">';
-        echo '<a href="' . esc_url($collection_permalink) . '">';
-        echo get_the_post_thumbnail($collection->ID, 'thumbnail');
-        echo '<h3>' . esc_html(get_the_title($collection->ID)) . '</h3>';
-        echo '</a>';
-        echo '<p>Totalpris: ' . wc_price($total_price) . '</p>';
-
-        echo '<form method="post" class="buy-now-form">';
-        echo '<input type="hidden" name="collection_id" value="' . esc_attr($collection->ID) . '">';
-        echo '<button type="submit" class="buy-now-button">Köp nu</button>';
-        echo '</form>';
-
-        echo '</div>';
-    }
-    echo '</div>';
-}
 ?>
 
 <h3?php if (have_posts()): while (have_posts()): the_post(); the_content(); endwhile; endif; ?>

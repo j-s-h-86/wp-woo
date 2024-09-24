@@ -3,6 +3,9 @@ Theme Name: My Theme
 
 */
 
+html {
+    font-family: "Bitter", serif;
+}
 html, body {
     margin: 0;
     padding: 0;
@@ -32,7 +35,7 @@ html, body {
 }
 
 body {
-    background-color: darkgray;
+    background-color: bisque;
 }
 
 /* #content {
@@ -83,8 +86,8 @@ body {
     border-radius: 5%;
     padding: 20px;
     text-align: center;
-    color: white;
-    background-color: darkgray;
+    color: black;
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;

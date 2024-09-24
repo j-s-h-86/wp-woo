@@ -3,6 +3,8 @@
 function my_theme_enqueue_styles()
 {
     wp_enqueue_style('my-theme-style', get_stylesheet_uri());
+
+    wp_enqueue_style('mt-fonts', 'https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap');
 }
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
@@ -125,6 +127,7 @@ function get_products_in_categories()
                                 </a>
                                 <form method="post" class="buy-now-form">
                                     <input type="hidden" name="product_id" value="<?php echo esc_attr($product->get_id()); ?>">
+                                    <input type="hidden" name="add" value="add_to_cart">
                                     <button type="submit" class="buy-now-button">Köp nu</button>
                                 </form>
 
@@ -158,18 +161,76 @@ function mt_handle_add_all_to_cart()
 
 add_action('template_redirect', 'mt_handle_add_all_to_cart');
 
-add_action('init', 'handle_buy_now');
-function handle_buy_now()
+function handle_add_to_cart()
 {
-    if (isset($_POST['product_id'])) {
+    if (isset($_POST['add']) && $_POST['add'] === 'add_to_cart' && !empty($_POST['product_id'])) {
         $product_id = intval($_POST['product_id']);
-        // Lägg till produkten i kundvagnen
         WC()->cart->add_to_cart($product_id);
-
-        // Om du vill omdirigera till kundvagnen eller kassan efteråt
-        wp_redirect(wc_get_cart_url());
+        wp_safe_redirect(wc_get_cart_url());
         exit;
     }
 }
+add_action('template_redirect', 'handle_add_to_cart');
 
+function display_collections($args = null)
+{
+    if (!$args) {
+        $args = array(
+            'post_type' => 'collection',
+            'posts_per_page' => -1,
+            'post_status' => 'publish'
+        );
+    }
+    $collections = get_posts($args);
+
+    if (empty($collections)) {
+        echo '<p>Inga kollektioner hittades.</p>';
+        return;
+    }
+
+    echo '<div class="collectionContainers">';
+
+    foreach ($collections as $collection) {
+        $selected_products = get_post_meta($collection->ID, '_collection_products', true);
+
+
+        if (!is_array($selected_products)) {
+            $selected_products = array();
+        }
+
+        if (empty($selected_products)) {
+            echo '<p>No products found for collection ID: ' . $collection->ID . '</p>';
+            continue;
+        }
+
+        $total_price = 0;
+        foreach ($selected_products as $product_id) {
+            $product = wc_get_product($product_id);
+            if ($product) {
+                $total_price += $product->get_price();
+            }
+        }
+
+        $collection_permalink = get_permalink($collection->ID);
+        echo '<div class="collection">';
+        echo '<a href="' . esc_url($collection_permalink) . '">';
+        // echo get_the_post_thumbnail($collection->ID, 'thumbnail');
+        if (has_post_thumbnail($collection->ID)) {
+            echo get_the_post_thumbnail($collection->ID, 'thumbnail');
+        } else {
+            echo '<img src="https://m.media-amazon.com/images/I/61gJexHvUgS._AC_UF1000,1000_QL80_.jpg" alt="Default Thumbnail">';
+        }
+        echo '<h3>' . esc_html(get_the_title($collection->ID)) . '</h3>';
+        echo '</a>';
+        echo '<p>Totalpris: ' . wc_price($total_price) . '</p>';
+
+        echo '<form method="post" class="buy-now-form">';
+        echo '<input type="hidden" name="collection_id" value="' . esc_attr($collection->ID) . '">';
+        echo '<button type="submit" class="buy-now-button">Köp nu</button>';
+        echo '</form>';
+
+        echo '</div>';
+    }
+    echo '</div>';
+}
 
