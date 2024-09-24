@@ -11,6 +11,16 @@ html, body {
     padding: 0;
 }
 
+.centered-site {
+    margin: auto;
+    width: 100%;
+    max-width: 1100px;
+}
+
+h3 {
+    text-align: center;
+}
+
 #primary-menu {
     list-style: none;
     margin-bottom: 20px;
@@ -97,11 +107,6 @@ a {
     text-decoration: none;
     color: black;
 }
-/* 
-.thumb_container {
-    height: 100px;
-    width: 75px;
-} */
 
 .product img {
     height: 100px   !important;

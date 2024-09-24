@@ -15,8 +15,7 @@ function navbar()
 }
 add_action('init', 'navbar');
 
-// Hantera formulärsubmitt för "Köp nu"-knappen
-function handle_buy_now_form_submission()
+function buy_collection()
 {
     if (isset($_POST['collection_id'])) {
         $collection_id = intval($_POST['collection_id']);
@@ -32,7 +31,7 @@ function handle_buy_now_form_submission()
         exit;
     }
 }
-add_action('template_redirect', 'handle_buy_now_form_submission');
+add_action('template_redirect', 'buy_collection');
 
 add_action('form_on_page', 'create_collection_form');
 
@@ -86,10 +85,8 @@ function get_products_in_categories()
     ?>
     <div class="products-by-category">
         <?php
-        // Få alla produktkategorier
         $product_categories = get_terms('product_cat', array('hide_empty' => false));
 
-        // Loopa genom varje kategori
         foreach ($product_categories as $category) {
             if ($category->slug === 'uncategorized') {
                 continue;
@@ -99,7 +96,6 @@ function get_products_in_categories()
                 <h2><?php echo $category->name; ?></h2>
                 <div class="products">
                     <?php
-                    // WP_Query för att få produkter i denna kategori
                     $args = array(
                         'post_type' => 'product',
                         'posts_per_page' => -1,
@@ -113,7 +109,6 @@ function get_products_in_categories()
                     );
                     $products = new WP_Query($args);
 
-                    // Loopa genom produkterna
                     if ($products->have_posts()) {
                         while ($products->have_posts()) {
                             $products->the_post();
@@ -148,7 +143,7 @@ function get_products_in_categories()
     <?php
 }
 
-function mt_handle_add_all_to_cart()
+function add_collection_to_cart()
 {
     if (isset($_POST['add']) && $_POST['add'] === 'add_to_cart' && !empty($_POST['products'])) {
         foreach ($_POST['products'] as $product) {
@@ -159,9 +154,9 @@ function mt_handle_add_all_to_cart()
     }
 }
 
-add_action('template_redirect', 'mt_handle_add_all_to_cart');
+add_action('template_redirect', 'add_collection_to_cart');
 
-function handle_add_to_cart()
+function add_item_to_cart()
 {
     if (isset($_POST['add']) && $_POST['add'] === 'add_to_cart' && !empty($_POST['product_id'])) {
         $product_id = intval($_POST['product_id']);
@@ -170,7 +165,7 @@ function handle_add_to_cart()
         exit;
     }
 }
-add_action('template_redirect', 'handle_add_to_cart');
+add_action('template_redirect', 'add_item_to_cart');
 
 function display_collections($args = null)
 {
@@ -234,3 +229,20 @@ function display_collections($args = null)
     echo '</div>';
 }
 
+function get_my_taxonomies()
+{
+    $terms = get_terms(array(
+        'taxonomy' => 'connoisseur',
+        'hide_empty' => true,
+        'parent' => 0
+    ));
+
+    if ($terms) {
+        echo '<div class="taxTermsContainer">
+        <p class="categoriesP">Kategorier: </p>' ?>
+        <?php
+        foreach ($terms as $term) {
+            echo ('<a href="' . get_term_link($term) . '">' . $term->name . '</a>');
+        }
+    }
+}
