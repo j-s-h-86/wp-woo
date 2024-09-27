@@ -84,6 +84,7 @@ function get_products_in_categories()
 {
     ?>
     <div class="products-by-category">
+        <p>Våra öl</p>
         <?php
         $product_categories = get_terms('product_cat', array('hide_empty' => false));
 
@@ -183,6 +184,7 @@ function display_collections($args = null)
         return;
     }
 
+    echo '<h3>Våra färdiga paket</h3>';
     echo '<div class="collectionContainers">';
 
     foreach ($collections as $collection) {
