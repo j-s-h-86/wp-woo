@@ -3,17 +3,14 @@
 
 get_header(); ?>
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
+<?php
+while (have_posts()):
+	the_post();
 
-		<?php
-		while (have_posts()):
-			the_post();
+	the_content();
 
-			the_content();
+endwhile;
+?>
 
-		endwhile; // End of the loop.
-		?>
-
-		<?php
-		get_footer();
+<?php
+get_footer();

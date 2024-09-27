@@ -205,7 +205,14 @@ body .woocommerce ul.products li.product a img {
 display: inline;
 }
 
-.addToCartButton .button {
+.addToCartButton {
+    height: 40px;
+    width: 60px;
+    border-radius: 10px;
+}
+
+.addCollectionToCartButton {
     height: 50px;
-    background-color: brown;
+    width: 70px;
+    border-radius: 10px;
 }

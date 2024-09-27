@@ -213,7 +213,7 @@ function display_collections($args = null)
         if (has_post_thumbnail($collection->ID)) {
             echo get_the_post_thumbnail($collection->ID, 'thumbnail');
         } else {
-            echo '<img src="https://m.media-amazon.com/images/I/61gJexHvUgS._AC_UF1000,1000_QL80_.jpg" alt="Default Thumbnail">';
+            echo '<img src="https://m.media-amazon.com/images/I/61gJexHvUgS._AC_UF1000,1000_QL80_.jpg" alt="Default Thumbnail" style="width: 100px; height: 150px;">';
         }
         echo '<h3>' . esc_html(get_the_title($collection->ID)) . '</h3>';
         echo '</a>';

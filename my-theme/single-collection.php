@@ -74,7 +74,7 @@ get_header();
                 echo '<input type="hidden" name="products[]" value="' . esc_attr($product) . '">';
             }
             ?>
-            <button type="submit" class="addToCartButton">Köp nu: <?php echo wc_price($total_price) ?></button>
+            <button type="submit" class="addCollectionToCartButton">Köp nu <?php echo wc_price($total_price) ?></button>
         </form>
         <?php
     }
