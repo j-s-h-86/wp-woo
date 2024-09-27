@@ -73,7 +73,7 @@ function create_collection_form()
             echo 'Inga produkter hittades.';
         }
         ?>
-        <input type="submit" value="Skapa kollektion" />
+        <input type="submit" class="button" value="Skapa kollektion" />
     </form>
     <?php
 }
@@ -123,7 +123,7 @@ function get_products_in_categories()
                                 <form method="post" class="buy-now-form">
                                     <input type="hidden" name="product_id" value="<?php echo esc_attr($product->get_id()); ?>">
                                     <input type="hidden" name="add" value="add_to_cart">
-                                    <button type="submit" class="buy-now-button">Köp nu</button>
+                                    <button type="submit" class="addToCartButton">Köp nu</button>
                                 </form>
 
                             </div>
@@ -221,7 +221,7 @@ function display_collections($args = null)
 
         echo '<form method="post" class="buy-now-form">';
         echo '<input type="hidden" name="collection_id" value="' . esc_attr($collection->ID) . '">';
-        echo '<button type="submit" class="buy-now-button">Köp nu</button>';
+        echo '<button type="submit" class="addToCartButton">Köp nu</button>';
         echo '</form>';
 
         echo '</div>';

@@ -10,7 +10,6 @@ get_header(); ?>
 			?>
 			<h1><?php the_title(); ?></h1>
 			<?php
-			var_dump("hej");
 			the_content();
 		endwhile;
 	endif;

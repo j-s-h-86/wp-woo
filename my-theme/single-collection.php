@@ -30,11 +30,12 @@ get_header();
                         $product_price = $product->get_price();
 
                         $total_price += $product_price;
-
+                        echo '<div class="itemInCustomCollection">';
                         echo '<h3>' . $product_title . '</h3>';
                         echo $product_thumbnail;
                         echo '<p>' . $product_content . '</p>';
                         echo 'Pris: ' . wc_price($product_price);
+                        echo '</div>';
                     }
                 }
 
@@ -54,7 +55,7 @@ get_header();
         }
 
         if ($all_terms) {
-            echo '<h2>Included in category:</h2>';
+            echo '<h2 class="includedInCategory">Included in category:</h2>';
             echo '<ul>';
             foreach ($all_terms as $term) {
                 echo '<li><a href="' . get_term_link($term) . '">' . esc_html($term->name) . '</a></li>';
@@ -73,7 +74,7 @@ get_header();
                 echo '<input type="hidden" name="products[]" value="' . esc_attr($product) . '">';
             }
             ?>
-            <button type="submit">Add collection to cart: <?php echo wc_price($total_price) ?></button>
+            <button type="submit" class="addToCartButton">Köp nu: <?php echo wc_price($total_price) ?></button>
         </form>
         <?php
     }
@@ -81,6 +82,7 @@ get_header();
 
     ?>
 </div>
+<p><?php get_my_taxonomies(); ?></p>
 <?php
 get_footer();
 

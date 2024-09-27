@@ -4,7 +4,6 @@
  */
 get_header();
 ?>
-<?php get_my_taxonomies(); ?>
 <div class="centered-site">
 
     <?php if (have_posts()):
@@ -42,4 +41,5 @@ get_header();
     <?php do_action('create_collection_form'); ?>
     <?php do_action('form_on_page'); ?>
 </div>
+<p><?php get_my_taxonomies(); ?></p>
 <?php get_footer(); ?>

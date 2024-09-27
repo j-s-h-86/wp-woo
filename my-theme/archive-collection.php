@@ -2,24 +2,19 @@
 get_header();
 
 ?>
-<h2>Archive collection</h2>
-<?php
-$terms = get_terms(array(
-    'taxonomy' => 'connoisseur',
-    'hide_empty' => true,
-    'parent' => 0
-));
-?>
+<div class="centered-site">
+    <h2>Archive collection</h2>
+    <?php
+    $terms = get_terms(array(
+        'taxonomy' => 'connoisseur',
+        'hide_empty' => true,
+        'parent' => 0
+    ));
+    ?>
 
-<!-- <div class="taxTermsContainer">
-    <p class="categoriesP">Kategorier: </p> -->
-<?php get_my_taxonomies();
-// if ($terms && !is_wp_error($terms)) {
-//     foreach ($terms as $term) {
-//         echo '<a class="taxTermsLinks" href="' . get_term_link($term) . '">' . esc_html($term->name) . '</a>';
-//     }
-// }
-?>
+    <?php get_my_taxonomies();
+
+    ?>
 </div>
 
 <form method="GET" action="">
@@ -97,6 +92,6 @@ function handle_date_and_taxonomy_filter()
 <?php
 handle_date_and_taxonomy_filter();
 ?>
-
+</div>
 <?php
 get_footer();

@@ -48,11 +48,6 @@ body {
     background-color: bisque;
 }
 
-/* #content {
-    display: flex;
-    justify-content: center;
-} */
-
 #content img {
     justify-self: center;
     border-radius: 10px;
@@ -80,15 +75,15 @@ body {
     margin-bottom: 20px;
 }
 
-.products {
+.products-by-category .products {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 20px;
-}
+} 
 
-.product {
+.products-by-category .product {
     height: 300px;
     width: 120px;
     box-sizing: border-box;
@@ -97,7 +92,7 @@ body {
     padding: 20px;
     text-align: center;
     color: black;
-    background-color: white;
+    background-color: rgb(242, 241, 241);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -145,11 +140,31 @@ a {
 }
 
 .collection {
+    padding-top: 5px;
     height: 300px;
     width: 150px;
     border: 1px solid black;
     border-radius: 5%;
     text-align: center;
+    background-color: rgb(242, 241, 241);
+}
+
+.customCollection {
+    width: 100%;
+    height: 350px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.itemInCustomCollection {
+    width: 100px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .taxTermsContainer {
@@ -175,4 +190,22 @@ color: red;
     height: 150px;
     width: 150px;
     border: 1px solid black;
+}
+
+.woocommerce div.product div.images .woocommerce-product-gallery__wrapper {
+    width: 150px;
+}
+
+.woocommerce ul.products li.product, .woocommerce-page ul.products li.product {
+    width: 150px;
+    padding-top: 10px;
+}
+
+body .woocommerce ul.products li.product a img {
+display: inline;
+}
+
+.addToCartButton .button {
+    height: 50px;
+    background-color: brown;
 }

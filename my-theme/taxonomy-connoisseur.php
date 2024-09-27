@@ -25,6 +25,7 @@ get_header();
         echo '<p>Inga inlägg hittades i denna taxonomi.</p>';
     endif;
     ?>
+    <p><?php get_my_taxonomies(); ?></p>
 </div>
 <?php
 

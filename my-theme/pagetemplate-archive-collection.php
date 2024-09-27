@@ -5,7 +5,7 @@ Template Name: Collection Archive
 get_header();
 ?>
 
-<?php get_my_taxonomies(); ?>
+<!-- <?php get_my_taxonomies(); ?> -->
 <div class="centered-site">
 
     <?php
